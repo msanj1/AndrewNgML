@@ -27,6 +27,11 @@ sigma = zeros(1, size(X, 2));
 %       
 
 
+mu = mean(X);
+X_norm = X - mu; %subtracting mean from the dataset
+
+sigma = std(X);
+X_norm = X_norm ./ sigma; %divide each feature by std deviation
 
 
 
