@@ -12,6 +12,13 @@ J = 0;
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
+% X is the feature Matrix ie [1 2;1 3,1 4]
+% y is the profit vector ie [3,4,5]
+% theta is the paramter vector ie [0;0] 2x1
+
+J = 1/(2*m) * sum(((X * theta) - y) .^ 2); %2x1    X=mx2 => mx1
+
+
 
 
 
