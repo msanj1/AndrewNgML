@@ -10,7 +10,13 @@ g = zeros(size(z));
 %               vector or scalar).
 
 
+%e = exp((-1 * z));
+%fprintf('\nProgram paused. Check e.\n');
 
+%exp((-1 * z))
+
+
+g = 1 ./ (1 + exp((-z)));
 
 
 % =============================================================
