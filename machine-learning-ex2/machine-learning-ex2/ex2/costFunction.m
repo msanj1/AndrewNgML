@@ -21,11 +21,19 @@ grad = zeros(size(theta));
 %
 
 
+%theta = 3 x 1
+%X = 100 * 3
+%result should 100 x 1 vector
+
+z = X * theta; %linear hypothesis
+h = sigmoid(z);
+
+J = (1/m) * sum((-y .* log(h)) - ((1 - y) .* log(1 - h)));
 
 
 
 
-
+grad = 1/m * ((h - y)' * X)'; % 1 * 100  * 100 * 3 => 1 * 3
 
 % =============================================================
 
