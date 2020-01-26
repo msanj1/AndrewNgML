@@ -16,11 +16,17 @@ p = zeros(m, 1);
 %
 
 
+result = sigmoid( X * theta);
 
+for i = 1:length(result)
+  if result(i) >= 0.5
+    p(i) = 1;
+  else
+    p(i) = 0;
+  end
+end
 
-
-
-
+%p = result;
 % =========================================================================
 
 
