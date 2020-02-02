@@ -17,6 +17,8 @@ p = zeros(size(X, 1), 1);
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
 
+result = zeros(m,num_labels);
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: Complete the following code to make predictions using
 %               your learned logistic regression parameters (one-vs-all).
@@ -31,9 +33,13 @@ X = [ones(m, 1) X];
 %       
 
 
+for i=1:num_labels
+   result(:,i) = (X * all_theta(i,:)'); % 5000 x 1 result for the probablity of digit 0
+endfor
 
+[row,column] = max(result,[],2);
 
-
+p = column;
 
 
 % =========================================================================
