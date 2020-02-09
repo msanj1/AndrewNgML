@@ -62,25 +62,36 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+labels = eye(num_labels);
+
 
 a1 = [ones(size(X,1),1) X];
 
 z2 = a1 * Theta1';
 
-%z2 = a1 * Theta1
+a2 = sigmoid(z2);
 
-%a1 = (5000 * 401)' => 401 x 5000
-%Theta1 = 25 * 401 => 401 * 25
+a2 = [ones(size(X,1),1) a2]; %adding a20
 
+z3 = a2 * Theta2';
 
+a3 = sigmoid(z3);
 
+ki = zeros(m,1);
+for i=1:m
+    xi = X(i,:)'; %400x1
+    yi = y(i); %scalar
+    
+    yi = labels(yi,:); % 1x10
+       
+    htheta = a3(i,:); % 1x10
+    
+    ki(i) = sum((-yi' .* log(htheta')) - ((1 - yi') .* log(1 - htheta')));  
+endfor
 
+J = (1/m) * sum(ki);
 
-
-
-
-
-
+%J = (1/m) * sum((-y .* log(h)) - ((1 - y) .* log(1 - h)));
 
 
 
