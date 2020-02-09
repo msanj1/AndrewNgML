@@ -88,16 +88,16 @@ for i=1:m
        
     htheta = a3(i,:); % 1x10
     
-    ki(i) = sum((-yi' .* log(htheta')) - ((1 - yi') .* log(1 - htheta')));  
+    ki(i) = sum((-yi' .* log(htheta')) - ((1 - yi') .* log(1 - htheta'))); 
+   
+    delta3 = a3(i,:)' - yi';
+    delta2 = Theta2' * delta3 .* sigmoidGradient(z2(1,:)'(2,end));
 endfor
 
 J = ((1/m) * sum(ki));
 %fprintf('Cost is without regularization is %f\n',J);
 J = J + ((lambda / ( 2 * m)) * (sum((Theta1(:,2:end)(:) .^ 2)) + sum((Theta2(:,2:end)(:) .^ 2))));
 
-%J = (1/m) * sum(ki);
-
-%J = (1/m) * sum((-y .* log(h)) - ((1 - y) .* log(1 - h)));
 
 
 
