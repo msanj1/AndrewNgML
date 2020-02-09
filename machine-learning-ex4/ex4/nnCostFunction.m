@@ -80,6 +80,10 @@ a3 = sigmoid(z3);
 ki = zeros(m,1);
 
 ylabel = labels(y,:);
+
+Delta1 = zeros(size(Theta1));
+Delta2 = zeros(size(Theta2));
+
 for i=1:m
     xi = X(i,:)'; %400x1
     yi = y(i); %scalar
@@ -91,7 +95,14 @@ for i=1:m
     ki(i) = sum((-yi' .* log(htheta')) - ((1 - yi') .* log(1 - htheta'))); 
    
     delta3 = a3(i,:)' - yi';
-    delta2 = Theta2' * delta3 .* sigmoidGradient(z2(1,:)'(2,end));
+    delta2 = (Theta2' * delta3) .* sigmoidGradient(z2(1,:)'(2,end));
+
+    Delta1 = Delta1 + (delta2(2:end) * a1(i,:));
+    %fprintf('Delta1 is %f\n',Delta1);
+
+    Delta2 = Delta2 + (delta3 * a2(i,:));
+    %fprintf('Delta2 is %f\n',Delta2);
+
 endfor
 
 J = ((1/m) * sum(ki));
