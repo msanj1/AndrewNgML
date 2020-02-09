@@ -78,11 +78,13 @@ z3 = a2 * Theta2';
 a3 = sigmoid(z3);
 
 ki = zeros(m,1);
+
+ylabel = labels(y,:);
 for i=1:m
     xi = X(i,:)'; %400x1
     yi = y(i); %scalar
     
-    yi = labels(yi,:); % 1x10
+    yi = ylabel(i,:); % 1x10
        
     htheta = a3(i,:); % 1x10
     
