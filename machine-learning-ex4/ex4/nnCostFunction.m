@@ -91,7 +91,11 @@ for i=1:m
     ki(i) = sum((-yi' .* log(htheta')) - ((1 - yi') .* log(1 - htheta')));  
 endfor
 
-J = (1/m) * sum(ki);
+J = ((1/m) * sum(ki));
+%fprintf('Cost is without regularization is %f\n',J);
+J = J + ((lambda / ( 2 * m)) * (sum((Theta1(:,2:end)(:) .^ 2)) + sum((Theta2(:,2:end)(:) .^ 2))));
+
+%J = (1/m) * sum(ki);
 
 %J = (1/m) * sum((-y .* log(h)) - ((1 - y) .* log(1 - h)));
 
