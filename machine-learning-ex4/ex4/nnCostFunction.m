@@ -111,9 +111,21 @@ J = ((1/m) * sum(ki));
 %fprintf('Cost is without regularization is %f\n',J);
 J = J + ((lambda / ( 2 * m)) * (sum((Theta1(:,2:end)(:) .^ 2)) + sum((Theta2(:,2:end)(:) .^ 2))));
 
+Theta1 = Theta1(:,2:end); %remove the bias unit
+Theta1 = [zeros(size(Theta1,1),1) Theta1]; %add a zero instead of the bias unit
 
-Theta1_grad =  (1/m) * Delta1;
-Theta2_grad = (1/m) * Delta2;
+Theta2 = Theta2(:,2:end); %remove the bias unit
+Theta2 = [zeros(size(Theta2,1),1) Theta2]; %add a zero instead of the bias unit
+
+reg_term1 = (lambda / m) .* Theta1;
+reg_term2 = (lambda / m) .* Theta2;
+
+%fprintf('Regularization term for Theta1 is %f\n',reg_term1);
+%fprintf('Regularization term for Theta2 is %f\n',reg_term2);
+
+
+Theta1_grad =  ((1/m) * Delta1) + reg_term1;
+Theta2_grad = ((1/m) * Delta2) + reg_term2;
 
 
 % -------------------------------------------------------------
