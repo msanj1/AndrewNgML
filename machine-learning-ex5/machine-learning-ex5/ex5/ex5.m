@@ -218,3 +218,7 @@ end
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
+
+
+testErrorlmb3 = linearRegCostFunction(X_poly_test,ytest,theta,0);
+fprintf('test error for lambda 3 is %f .\n',testErrorlmb3);
