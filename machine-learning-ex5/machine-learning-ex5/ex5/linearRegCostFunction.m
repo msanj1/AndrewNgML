@@ -26,8 +26,8 @@ J = 1/(2*m) * ((X * theta) - y)' * ((X * theta) - y);
 
 J = J + regTerm;
 
-
-
+h = X * theta;
+grad = (1/m * ((h - y)' * X)') + (lambda / m) * [0;theta(2:end)]; 
 
 
 
