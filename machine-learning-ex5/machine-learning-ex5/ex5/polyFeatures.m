@@ -16,6 +16,13 @@ X_poly = zeros(numel(X), p);
 % 
 
 
+for i = 1:p
+  %fprintf('i=%f.\n',i);
+  t = X .^ i;
+  %fprintf('t=%f.\n',t);
+  X_poly(:,i) = t;
+  %fprintf('X_poly=%f.\n',X_poly);
+end
 
 
 

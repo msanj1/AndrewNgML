@@ -22,7 +22,7 @@ grad = zeros(size(theta));
 
 regTerm = (lambda / (2 * m)) * (theta(2:end)' * theta(2:end)); % lambda / 2m * (SUM(theta(2:end) .^ 2))
 
-J = 1/(2*m) * ((X * theta) - y)' * ((X * theta) - y);
+J = (1 / (2*m)) *  sum(((X*theta) - y) .^ 2);
 
 J = J + regTerm;
 
