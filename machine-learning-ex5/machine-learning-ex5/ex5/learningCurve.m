@@ -54,23 +54,40 @@ error_val   = zeros(m, 1);
 % ---------------------- Sample Solution ----------------------
 
 
+  
+error_train_all = zeros(m, 50);
+error_val_all  = zeros(m, 50);
+for d = 1:50
+  random_training_indices = randperm(length(X))';
+  Xts = X(random_training_indices,:);
+  yts = y(random_training_indices,:);
 
+  random_cross_validation_indices = randperm(length(Xval))';
+  Xvalt = Xval(random_cross_validation_indices,:);
+  yvalt = yval(random_cross_validation_indices,:);
+  
+  for i = 1:m
+    
+    Xt = Xts(1:i,:);
+    yt = yts(1:i);
+    %Xcv = Xval(1:i,:);
+    %ycv = yval(1:i,:);
+    thetas = trainLinearReg(Xt,yt,lambda);
+    %printf('Xt=%f.\n',Xt);
+    %fprintf('yt=%f.\n',yt);
+    %error_train(i) = linearRegCostFunction(Xt,yt,thetas,0);
+    %error_val(i) = linearRegCostFunction(Xval,yval,thetas,0);
+    %fprintf('error_train=%f.\n',error_train(i));
+    
+    error_train_all(i,d) = linearRegCostFunction(Xt,yt,thetas,0);
+    error_val_all(i,d) = linearRegCostFunction(Xvalt,yvalt,thetas,0);
+    %fprintf('error_train=%f.\n',error_train(i));
+  end
 
-
-for i = 1:m
-  % Compute train/cross validation errors using training examples 
-  Xt = X(1:i,:);
-  yt = y(1:i);
-  Xcv = Xval(1:i,:);
-  ycv = yval(1:i,:);
-  thetas = trainLinearReg(Xt,yt,lambda);
-  %printf('Xt=%f.\n',Xt);
-  %fprintf('yt=%f.\n',yt);
-  error_train(i) = linearRegCostFunction(Xt,yt,thetas,0);
-  error_val(i) = linearRegCostFunction(Xval,yval,thetas,0);
-  %fprintf('error_train=%f.\n',error_train(i));
 end
 
+error_train = mean(error_train_all,2);
+error_val = mean(error_val_all,2);
 
 
 
