@@ -31,23 +31,28 @@ fprintf('Starting predictions\n');
 
 for c = 1:length(C)
   for s = 1:length(sigma)
-    fprintf('C is %f\n',C(c));
-     fprintf('Sigma is %f\n',sigma(s));
+    current_C = C(c);
+    current_sigma = sigma(s);
+    %fprintf('C is %f\n',C(c));
+    % fprintf('Sigma is %f\n',sigma(s));
 
 
-    trainingModel = svmTrain(X, y, C(c), @(x1, x2) gaussianKernel(x1, x2, sigma(s))); 
-    fprintf('Starting predictions\n');
+    trainingModel = svmTrain(X, y, current_C, @(x1, x2) gaussianKernel(x1, x2, current_sigma)); 
+    %fprintf('Starting predictions\n');
 
     crossValidationPredictions = svmPredict(trainingModel,Xval);
-    fprintf('Starting predictions\n');
+    %fprintf('Starting predictions\n');
 
     predictionError =  mean(double(crossValidationPredictions ~= yval));
     allpredictions(c,s) = predictionError;
   endfor
 endfor
 
+[minval,c_index] = min(min(allpredictions,[],2));
+[minval,sigma_index] = min(min(allpredictions,[],1));
 
-
+C = C(c_index);
+sigma = sigma(sigma_index);
 
 
 
