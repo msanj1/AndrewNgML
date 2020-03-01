@@ -8,8 +8,12 @@ function [C, sigma] = dataset3Params(X, y, Xval, yval)
 %
 
 % You need to return the following variables correctly.
-C = 1;
-sigma = 0.3;
+%C = 1;
+%sigma = 0.3;
+
+C = [0.01; 0.03; 0.1; 0.3;1;3;10;30];
+sigma = [0.01; 0.03; 0.1; 0.3; 1; 3; 10; 30];
+allpredictions = zeros(length(C),length(sigma));
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Fill in this function to return the optimal C and sigma
@@ -22,6 +26,45 @@ sigma = 0.3;
 %  Note: You can compute the prediction error using 
 %        mean(double(predictions ~= yval))
 %
+
+fprintf('Starting predictions\n');
+
+for c = 1:length(C)
+  for s = 1:length(sigma)
+    fprintf('C is %f\n',C(c));
+     fprintf('Sigma is %f\n',sigma(s));
+
+
+    trainingModel = svmTrain(X, y, C(c), @(x1, x2) gaussianKernel(x1, x2, sigma(s))); 
+    fprintf('Starting predictions\n');
+
+    crossValidationPredictions = svmPredict(trainingModel,Xval);
+    fprintf('Starting predictions\n');
+
+    predictionError =  mean(double(crossValidationPredictions ~= yval));
+    allpredictions(c,s) = predictionError;
+  endfor
+endfor
+
+
+
+
+
+
+%fprintf('Calculating the training model \n');
+
+%trainingModel = svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma)); 
+
+%fprintf('Training Model result is %f',trainingModel);
+
+%crossValidationPredictions = svmPredict(trainingModel,Xval);
+
+%fprintf('Predicted results %f\n', crossValidationPredictions);
+
+%predictionError =  mean(double(crossValidationPredictions ~= yval));
+
+%fprintf('Prediction error %f\n',predictionError);
+
 
 
 
