@@ -108,7 +108,11 @@ pause;
 
 % Sort the weights and obtin the vocabulary list
 %[weight, idx] = sort(model.X, 'descend');
-[weight, idx] = sort(model.sv_coef, 'descend');
+w = model.SVs' * model.sv_coef; %libsm implementation
+if(model.Label(1) == -1)
+  w = -w;
+end
+[weight, idx] = sort(w, 'descend');
 vocabList = getVocabList();
 
 fprintf('\nTop predictors of spam: \n');
