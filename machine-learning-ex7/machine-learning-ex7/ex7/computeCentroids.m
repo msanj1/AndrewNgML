@@ -26,7 +26,16 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
+for i=1:K
+  pointIndices = find(idx == i);
+   X(pointIndices,:);
+   %fprintf('K is %f \n', i);
+   
+  centroidNewLocation =  mean(X(pointIndices,:));
+  %fprintf('Mean for K = %d is %d\n', i,centroidNewLocation);
+  centroids(i,:) = centroidNewLocation;
+  
+endfor
 
 
 
