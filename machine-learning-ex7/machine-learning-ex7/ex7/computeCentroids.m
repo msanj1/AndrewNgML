@@ -28,12 +28,26 @@ centroids = zeros(K, n);
 
 for i=1:K
   pointIndices = find(idx == i);
-   X(pointIndices,:);
-   %fprintf('K is %f \n', i);
-   
-  centroidNewLocation =  mean(X(pointIndices,:));
-  %fprintf('Mean for K = %d is %d\n', i,centroidNewLocation);
-  centroids(i,:) = centroidNewLocation;
+  
+  %if empty
+  if (length(pointIndices) == 0)
+    randidx = randperm(size(X,1)); %create a random permuation of number numbers 1 - size(X,1)
+
+    randomCentroid = X(randidx(1:1),:); %pick the first 3 centroids
+    centroids(i,:) = randomCentroid;
+  else
+      X(pointIndices,:);
+     %fprintf('K is %f \n', i);
+     
+    centroidNewLocation =  mean(X(pointIndices,:));
+    %fprintf('Mean is %d %d\n', centroidNewLocation);
+    centroids(i,:) = centroidNewLocation;
+    %fprintf('End \n');
+  endif
+ 
+
+
+
   
 endfor
 
