@@ -22,7 +22,20 @@ idx = zeros(size(X,1), 1);
 %
 
 
-
+for i=1:size(X,1)
+  currentX = X(i,:); % 1 x 2
+  
+  allJ = zeros(K,1);
+  for kIndex=1:K
+    muJ = centroids(kIndex,:); % 1 x 2
+    j = norm(currentX - muJ) ^ 2;
+    %fprintf('J is %d \n', j);
+    allJ(kIndex) = j;
+  endfor
+  %fprintf('AllJ is %d\n', allJ);
+  [j,index] = min(allJ);
+  idx(i) = index;
+endfor
 
 
 
