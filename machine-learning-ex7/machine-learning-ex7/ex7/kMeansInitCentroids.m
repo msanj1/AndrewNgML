@@ -15,7 +15,7 @@ centroids = zeros(K, size(X, 2));
 
 randidx = randperm(size(X,1)); %create a random permuation of number numbers 1 - size(X,1)
 
-centroids = X(randidx(1:k),:); %pick the first 3 centroids
+centroids = X(randidx(1:K),:); %pick the first 3 centroids
 
 
 
