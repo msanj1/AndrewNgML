@@ -13,9 +13,11 @@ centroids = zeros(K, size(X, 2));
 %               the dataset X
 %
 
-randidx = randperm(size(X,1)); %create a random permuation of number numbers 1 - size(X,1)
+X_unq = unique(X,'rows');
 
-centroids = X(randidx(1:K),:); %pick the first 3 centroids
+randidx = randperm(size(X_unq,1)); %create a random permuation of number numbers 1 - size(X,1)
+
+centroids = X_unq(randidx(1:K),:); %pick the first K centroids
 
 
 
