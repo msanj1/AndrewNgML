@@ -45,8 +45,9 @@ diff_predicted_values = ((Theta * X')' - Y) .* R;
 
 J = 1/2 * sum(sum(diff_predicted_values .^ 2));
 
+X_grad = (((Theta * X') - Y') .* R')' * Theta;
 
-
+Theta_grad = ((Theta * X' - Y') .* R') * X;
 
 
 % =============================================================
