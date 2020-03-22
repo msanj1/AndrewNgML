@@ -23,16 +23,16 @@ for epsilon = min(pval):stepsize:max(pval)
     % Note: You can use predictions = (pval < epsilon) to get a binary vector
     %       of 0's and 1's of the outlier predictions
 
-
-
-
-
-
-
-
-
-
-
+    cvPredictions = pval < epsilon; % binary vector of all the entries that are anomolies
+    
+    tp = sum((cvPredictions == 1) & (yval == 1)); % calculating true positives
+    fp = sum((cvPredictions == 1) & (yval == 0)); % calculating false positives
+    fn = sum((cvPredictions == 0) & (yval == 1)); % calculating false negatives
+    
+    prec = tp / (tp + fp); %precission
+    rec = tp / (tp + fn); %recall
+    
+    F1 = (2 * prec * rec) / (prec + rec);
 
 
     % =============================================================
