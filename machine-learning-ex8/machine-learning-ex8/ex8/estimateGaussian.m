@@ -26,7 +26,7 @@ sigma2 = zeros(n, 1);
 for i=1:n
   x = X(:,i); %select a feature
   mu(i) = (1 / m) * sum(x); %calculate mean
-  sigma2(i) = (1/m) * sum((x - mu(i)) .^ 2) %calculate variance
+  sigma2(i) = (1/m) * sum((x - mu(i)) .^ 2); %calculate variance
   
 endfor
 
