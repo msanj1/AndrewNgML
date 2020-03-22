@@ -49,9 +49,9 @@ x_reg = (lambda / 2) * sum(sum(X .^ 2));
 
 J = 1/2 * sum(sum(diff_predicted_values .^ 2)) + theta_reg + x_reg;
 
-X_grad = (((Theta * X') - Y') .* R')' * Theta;
+X_grad = (((Theta * X' - Y') .* R')' * Theta) + (lambda * X);
 
-Theta_grad = ((Theta * X' - Y') .* R') * X;
+Theta_grad = (((Theta * X' - Y') .* R') * X) + (lambda * Theta);
 
 
 
